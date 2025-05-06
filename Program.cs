@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-    .LogTo(Console.WriteLine, LogLevel.Information));
+    //.LogTo(Console.WriteLine, LogLevel.Information)
+    .AddInterceptors(new EfMongoInterceptor()));
 
 
 

@@ -19,7 +19,7 @@ namespace Demo_EFC.Controllers
         [HttpGet]
         public IActionResult GetCategorias()
         {
-            var categorias = _context.Categorias.Include(c => c.Produtos).ToList();
+            var categorias = _context.Categorias.ToList();
             return Ok(categorias);
         }
 

@@ -3,6 +3,8 @@ using Demo_EFC.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Demo_EFC.Controllers
 {
@@ -22,7 +24,7 @@ namespace Demo_EFC.Controllers
         public IActionResult GetProdutos()
         {
             var produtos = _context.Produtos.Include(p => p.Categoria).ToList();
-            return Ok(produtos);
+            return Ok(JsonSerializer.Serialize(produtos));
         }
 
         [HttpPost]

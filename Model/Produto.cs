@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Text.Json.Serialization;
 
 namespace Demo_EFC.Model
 {
@@ -8,6 +9,7 @@ namespace Demo_EFC.Model
         public string Nome { get; set; }
         public decimal Preco { get; set; }
         public int CategoriaId { get; set; }
+        [JsonIgnore]
         public Categoria Categoria { get; set; }
     }
 
