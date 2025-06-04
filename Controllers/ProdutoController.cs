@@ -1,10 +1,9 @@
 ﻿using Demo_EFC.Context;
+using Demo_EFC.DTOs;
 using Demo_EFC.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Demo_EFC.Controllers
 {
@@ -28,8 +27,16 @@ namespace Demo_EFC.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProduto(Produto produto)
+        public IActionResult CreateProduto([FromBody] string produtoDto)
         {
+            var produtos = JsonSerializer.Deserialize<ProdutoDTO>(produtoDto);
+
+            if (produtos == null)
+                return BadRequest("");
+             var produto = new Produto();
+
+
+
             _context.Produtos.Add(produto);
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetProdutos), new { id = produto.Id }, produto);
